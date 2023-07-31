@@ -6,15 +6,8 @@ abstract class HomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-class ChangeColorText extends HomeEvent {
-  const ChangeColorText();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ChangeColorBackgroundButton extends HomeEvent {
-  const ChangeColorBackgroundButton();
+class InitEventHome extends HomeEvent {
+  const InitEventHome();
 
   @override
   List<Object> get props => [];

@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,8 @@ void main() async {
   await AppPrefs().initialize();
   bloc.Bloc.observer = AppBlocObserver();
   getItSetup();
-  runApp(wrapEasyLocalization(child: const _App()));
+  await initializeNotification();
+  return runApp(wrapEasyLocalization(child: const _App()));
 }
 
 class _App extends StatefulWidget {
@@ -41,7 +41,7 @@ class _AppState extends State<_App> {
   Widget build(BuildContext context) {
     return Portal(
       child: ScreenUtilInit(
-        designSize: const Size(1920, 1080),
+        designSize: const Size(390, 844),
         minTextAdapt: true,
         useInheritedMediaQuery: true,
         builder: (_, child) {

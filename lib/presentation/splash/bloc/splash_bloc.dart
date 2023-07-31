@@ -11,7 +11,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<SplashEvent>((event, emit) async {});
     on<InitSplashEvent>((event, emit) async {
       await Future.delayed(const Duration(seconds: 2), () {
-        navigatorKey.currentContext!.push(RouterManager.home);
+        // navigatorKey.currentContext!
+        //     .pushReplacementNamed(RouterManager.home, queryParameters: {'name': 'Mẫn'});
+        navigatorKey.currentContext!.goNamed(RouterManager.login);
+         
+        // .pushReplacementUtils(RouterManager.home, queryParameters: {'name': 'Mẫn'});
       });
     });
   }

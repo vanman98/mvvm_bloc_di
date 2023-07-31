@@ -7,11 +7,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    on<ChangeColorText>((event, emit) {
-      emit(const ColorTextState(color: Colors.red));
-    });
-    on<ChangeColorBackgroundButton>((event, emit) {
-      emit(const ColorBackgroundButton(colorBackground: Colors.green));
+    on<InitEventHome>((event, emit) {
     });
   }
 }

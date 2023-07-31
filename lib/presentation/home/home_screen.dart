@@ -1,29 +1,35 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:temp_package_name/presentation/widgets/widget_button.dart';
-
+import 'package:go_router/go_router.dart';
+import 'package:temp_package_name/app/base_widget/base_widget.dart';
+import 'package:temp_package_name/app/base_widget/loading_bloc/loading_bloc.dart';
 import '../../app/app.dart';
 import '../presentation.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String? name;
+  const HomeScreen({this.name, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final controller = findInstance<HomeBloc>();
   @override
   void initState() {
     super.initState();
+    controller.add(const InitEventHome());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseWidget(
+        child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         children: [
@@ -31,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Gap(32),
+              InkWell(
+                onTap: () => context.pop(true),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 30.w,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+              ),
               const Gap(20),
               Text(
                 AppThemeProvider.isDarkMode()
@@ -39,21 +54,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const Gap(16),
-              // WidgetButton(
-              //   borderRadius: BorderRadius.circular(8),
-              //   child: Container(
-              //     padding:
-              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 32),
-              //     child: Text(
-              //       'Next page',
-              //       style: Theme.of(context)
-              //           .textTheme
-              //           .labelLarge!
-              //           .copyWith(color: Theme.of(context).primaryColor),
-              //     ),
-              //   ),
-              // ),
-              // const Gap(32),
+              Row(
+                children: [
+                  Text(
+                    'NAME : ',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Text(
+                    widget.name ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(color: ColorManager.primary),
+                  )
+                ],
+              ),
             ],
           ),
           const Gap(20),
@@ -88,17 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     context.setLocale(e);
                                   },
                                   borderRadius: BorderRadius.circular(8),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 32),
-                                    child: Text(e.languageCode,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium!
-                                            .copyWith(
-                                                color: Theme.of(context)
-                                                    .primaryColor)),
-                                  ),
+                                  child: Text(e.languageCode,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor)),
                                 ),
                               ))
                           .toList(),
@@ -108,60 +119,53 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // StreamBuilder(
-          //   stream: AppPrefs.instance.box.watch(),
-          //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-          //     UserModel user = AppPrefs.instance.box.get(0);
-          //     return Container(
-          //       child: Text(user.name),
-          //     );
-          //   },
-          // ),
-          // WidgetDeleteButton(
-          //   callback: () {},
-          // ),
-          // Row(
-          //   children: [
-          //     WidgetRippleButton(
-          //       color: Colors.red,
-          //       child: Container(
-          //         padding:
-          //             const EdgeInsets.symmetric(vertical: 10, horizontal: 32),
-          //         child: Text(
-          //           'Change Text',
-          //           style: w400TextStyle(color: appColorBackground),
-          //         ),
-          //       ),
-          //       onTap: () => findInstance<HomeBloc>().add(ChangeColorText()),
-          //     ),
-          //     BlocConsumer<HomeBloc, HomeState>(
-          //       bloc: findInstance<HomeBloc>(),
-          //       listener: (context, state) {
-          //         // TODO: implement listener
-          //       },
-          //       buildWhen: (previous, current) =>
-          //           current is ColorBackgroundButton,
-          //       builder: (context, state) {
-          //         log("BUILDER BACKGROUND");
-          //         return WidgetRippleButton(
-          //           color: state is ColorBackgroundButton
-          //               ? state.colorBackground
-          //               : Colors.red,
-          //           child: Container(
-          //             padding: const EdgeInsets.symmetric(
-          //                 vertical: 10, horizontal: 32),
-          //             child: Text(
-          //               'Change Background',
-          //               style: w400TextStyle(color: appColorBackground),
-          //             ),
-          //           ),
-          //           onTap: () => findInstance<HomeBloc>()
-          //               .add(ChangeColorBackgroundButton()),
-          //         );
-          //       },
-          //     ),
-          //   ],
-          // ),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: 16.w).copyWith(bottom: 200),
+            child: Row(
+              children: [
+                Expanded(
+                  child: WidgetButton(
+                    onTap: () async {
+                      findInstance<LoadingBloc>().add(const SetLoading(true));
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Center(
+                      child: Text(
+                        'LOADING',
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                ),
+                Gap(40.w),
+                Expanded(
+                  child: WidgetButton(
+                    onTap: () async {
+                      showDialog(
+                          context: context,
+                          builder: (_) => DialogTwoButton(
+                                title: 'Bạn muốn dừng loading?',
+                                titleButtonConfirm: 'Xác nhận',
+                                onTapConfirm: () {
+                                  findInstance<LoadingBloc>()
+                                      .add(const SetLoading(false));
+                                  context.pop();
+                                },
+                              ));
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Center(
+                      child: Text(
+                        'STOP LOADING',
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Row(
             children: [
               const Spacer(),
@@ -186,6 +190,6 @@ class _HomeScreenState extends State<HomeScreen> {
           const Gap(32),
         ],
       ),
-    );
+    ));
   }
 }

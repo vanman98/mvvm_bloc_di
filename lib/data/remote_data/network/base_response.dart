@@ -12,17 +12,17 @@ const int _ERROR_DISCONNECT = -1;
 class BaseResponse<T> {
   int? status;
   int? code;
-  bool? success;
   String? message;
   T? data;
 
-  bool get isSuccess => code == _SUCCESS && (success ?? false);
+  bool get isSuccess => data != null;
 
-  bool get isError => code != _SUCCESS || (success ?? false);
+  bool get isError => data == null;
 
-  BaseResponse({this.success, this.message, this.data, this.code, this.status});
+  BaseResponse({this.message, this.data, this.code, this.status});
 
-  factory BaseResponse.fromResponse(Dio.Response response, {Function(dynamic json)? dataConverter}) {
+  factory BaseResponse.fromResponse(Dio.Response response,
+      {Function(dynamic json)? dataConverter}) {
     try {
       return BaseResponse._fromJson(jsonDecode(jsonEncode(response.data)),
           dataConverter: dataConverter)
@@ -33,9 +33,9 @@ class BaseResponse<T> {
     }
   }
 
-  BaseResponse._fromJson(dynamic json, {Function(dynamic json)? dataConverter}) {
+  BaseResponse._fromJson(dynamic json,
+      {Function(dynamic json)? dataConverter}) {
     status = json["status"];
-    success = json["success"];
     message = json["message"];
     data = dataConverter != null && json["data"] != null
         ? dataConverter(json["data"])
@@ -46,7 +46,6 @@ class BaseResponse<T> {
     var map = <String, dynamic>{};
     map["code"] = code;
     map["status"] = status;
-    map["success"] = success;
     map["message"] = message;
     map["data"] = data;
     return map;
@@ -60,20 +59,17 @@ class BaseResponse<T> {
       log("Error BaseResponse.withErrorRequest: $e");
     } finally {
       this.message = 'message_error_request'.tr();
-      this.success = false;
       this.data = null;
     }
   }
 
   BaseResponse.withErrorConvertData(error) {
     this.message = 'message_error_convert'.tr();
-    this.success = false;
     this.data = null;
   }
 
   BaseResponse.withNoInternetConnection() {
     this.message = 'message_disconnect'.tr();
-    this.success = false;
     this.data = null;
   }
 }

@@ -9,7 +9,7 @@ class AuthRepository {
     _instance!._api ??= ApiImplements();
     return _instance!;
   }
-  Future<BaseResponse> login(String email, String password) async {
-    return await _api!.login(email, password);
+  Future<BaseResponse> login(String phone, String password) async {
+    return await _api!.login(phone, password);
   }
 }

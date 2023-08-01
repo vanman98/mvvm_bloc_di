@@ -15,7 +15,7 @@ class ThemeManager {
         splashColor: ColorManager.primaryOpacity70,
         // Button theme
         buttonTheme: ButtonThemeData(
-            shape: StadiumBorder(),
+            shape: const StadiumBorder(),
             disabledColor: ColorManager.grey1,
             buttonColor: ColorManager.primary,
             splashColor: ColorManager.primaryOpacity70),
@@ -85,7 +85,7 @@ class ThemeManager {
         splashColor: ColorManager.primaryOpacity70,
         // Button theme
         buttonTheme: ButtonThemeData(
-            shape: StadiumBorder(),
+            shape: const StadiumBorder(),
             disabledColor: ColorManager.grey1,
             buttonColor: ColorManager.primary,
             splashColor: ColorManager.primaryOpacity70),

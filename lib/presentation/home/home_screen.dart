@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temp_package_name/app/base_widget/base_widget.dart';
-import 'package:temp_package_name/app/base_widget/loading_bloc/loading_bloc.dart';
 import '../../app/app.dart';
 import '../presentation.dart';
 
@@ -119,53 +118,52 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 16.w).copyWith(bottom: 200),
-            child: Row(
-              children: [
-                Expanded(
-                  child: WidgetButton(
-                    onTap: () async {
-                      findInstance<LoadingBloc>().add(const SetLoading(true));
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Center(
-                      child: Text(
-                        'LOADING',
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
-                Gap(40.w),
-                Expanded(
-                  child: WidgetButton(
-                    onTap: () async {
-                      showDialog(
-                          context: context,
-                          builder: (_) => DialogTwoButton(
-                                title: 'Bạn muốn dừng loading?',
-                                titleButtonConfirm: 'Xác nhận',
-                                onTapConfirm: () {
-                                  findInstance<LoadingBloc>()
-                                      .add(const SetLoading(false));
-                                  context.pop();
-                                },
-                              ));
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Center(
-                      child: Text(
-                        'STOP LOADING',
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding:
+          //       EdgeInsets.symmetric(horizontal: 16.w).copyWith(bottom: 200),
+          //   child: Row(
+          //     children: [
+          //       Expanded(
+          //         child: WidgetButton(
+          //           onTap: () async {
+          //             setLoading(true);
+          //           },
+          //           borderRadius: BorderRadius.circular(12),
+          //           child: Center(
+          //             child: Text(
+          //               'LOADING',
+          //               style: TextStyle(color: Theme.of(context).primaryColor),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //       Gap(40.w),
+          //       Expanded(
+          //         child: WidgetButton(
+          //           onTap: () async {
+          //             showDialog(
+          //                 context: context,
+          //                 builder: (_) => DialogTwoButton(
+          //                       title: 'Bạn muốn dừng loading?',
+          //                       titleButtonConfirm: 'Xác nhận',
+          //                       onTapConfirm: () {
+          //                         setLoading(false);
+          //                         context.pop();
+          //                       },
+          //                     ));
+          //           },
+          //           borderRadius: BorderRadius.circular(12),
+          //           child: Center(
+          //             child: Text(
+          //               'STOP LOADING',
+          //               style: TextStyle(color: Theme.of(context).primaryColor),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Row(
             children: [
               const Spacer(),

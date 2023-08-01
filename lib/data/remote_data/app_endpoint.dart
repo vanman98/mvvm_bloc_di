@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
-  static const String BASE_URL = '';
-  static const String LOGIN = '';
+  static const String BASE_URL = 'https://carsym-api.tekup.vn';
+  static const String LOGIN = '/core/auth/sign-in';
 
 
 

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'app/app.dart';
 import 'presentation/resource/resource.dart';
 
@@ -40,22 +41,24 @@ class _AppState extends State<_App> {
   @override
   Widget build(BuildContext context) {
     return Portal(
-      child: ScreenUtilInit(
-        designSize: const Size(390, 844),
-        minTextAdapt: true,
-        useInheritedMediaQuery: true,
-        builder: (_, child) {
-          return WidgetThemeWraper(
-            builder: (ThemeState themeState) => MaterialApp.router(
-              routerConfig: RouterManager.routers,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              debugShowCheckedModeBanner: false,
-              theme: themeState.theme,
-            ),
-          );
-        },
+      child: OverlaySupport(
+        child: ScreenUtilInit(
+          designSize: const Size(390, 844),
+          minTextAdapt: true,
+          useInheritedMediaQuery: true,
+          builder: (_, child) {
+            return WidgetThemeWraper(
+              builder: (ThemeState themeState) => MaterialApp.router(
+                routerConfig: RouterManager.routers,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                debugShowCheckedModeBanner: false,
+                theme: themeState.theme,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

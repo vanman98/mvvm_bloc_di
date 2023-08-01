@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       builder: (context, state) {
                         return Text(
-                          'meow'.tr(),
+                          StringManager.meow,
                           style: Theme.of(context).textTheme.labelSmall,
                         );
                       },

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:temp_package_name/presentation/presentation.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppMargin {
   static double m12 = 12.0.w;
   static double m16 = 16.0.w;
@@ -17,9 +15,6 @@ class AppPadding {
 }
 
 class AppSize {
-  static double width = MediaQuery.of(navigatorKey.currentContext!).size.width;
-  static double height =
-      MediaQuery.of(navigatorKey.currentContext!).size.height;
   static double s1_5 = 1.5.sp;
   static double s5 = 5.sp;
   static double s8 = 8.sp;

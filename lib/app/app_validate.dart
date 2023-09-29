@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temp_package_name/presentation/resource/resource.dart';
+import '../presentation/resource/string_manager.dart';
 
 class AppValidate {
   AppValidate._();

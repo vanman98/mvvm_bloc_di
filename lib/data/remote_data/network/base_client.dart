@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:temp_package_name/app/app.dart';
-import 'package:temp_package_name/data/data.dart';
+
+import '../../local_data/app_prefs.dart';
+import '../app_endpoint.dart';
 
 class AppClients extends DioForNative {
   static const String GET = "GET";
@@ -35,7 +35,9 @@ class AppClients extends DioForNative {
   _requestInterceptor(
       RequestOptions options, RequestInterceptorHandler handler) async {
     String accessToken = AppPrefs.accessToken ?? '';
-    options.headers.addAll({'Authorization': 'Bearer $accessToken'});
+    if (accessToken.isNotEmpty) {
+      options.headers.addAll({'Authorization': 'Bearer $accessToken'});
+    }
 
     log("Headers: ${options.headers}");
 
@@ -53,8 +55,10 @@ class AppClients extends DioForNative {
       default:
         break;
     }
-    options.connectTimeout = const Duration(minutes: AppEndpoint.connectTimeout);
-    options.receiveTimeout = const Duration(minutes: AppEndpoint.receiveTimeout);
+    options.connectTimeout =
+        const Duration(minutes: AppEndpoint.connectTimeout);
+    options.receiveTimeout =
+        const Duration(minutes: AppEndpoint.receiveTimeout);
     handler.next(options);
   }
 

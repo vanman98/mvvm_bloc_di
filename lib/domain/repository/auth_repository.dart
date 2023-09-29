@@ -1,4 +1,6 @@
-import 'package:temp_package_name/data/data.dart';
+
+import '../../data/remote_data/api/api_implements.dart';
+import '../../data/remote_data/network/base_response.dart';
 
 class AuthRepository {
   AuthRepository._();

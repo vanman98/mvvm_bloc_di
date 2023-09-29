@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
 import 'notification.dart';
 
 Future<void> backgroundMessageHandler(RemoteMessage message) async {
@@ -11,10 +12,15 @@ class FirebaseCloudMessaging {
   static final FirebaseMessaging instance = FirebaseMessaging.instance;
 
   static initFirebaseMessaging() async {
-    instance.requestPermission();
+    instance.requestPermission(
+        alert: true,
+        sound: true,
+        announcement: true,
+        criticalAlert: true,
+        badge: true);
     FirebaseMessaging.onMessage.listen((message) async {
       print("OnMessage: ${message.notification!.title}");
-      _handler(message, onlyShow: true);
+      _handler(message);
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       print("OnMessageOpenedApp: ${message.notification!.title}");
@@ -23,14 +29,11 @@ class FirebaseCloudMessaging {
     FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   }
 
-  static _handler(RemoteMessage message, {bool onlyShow = false}) async {
+  static _handler(RemoteMessage message, {bool? isBackground = false}) async {
     Map<String, dynamic> payload = message.data;
-    if (onlyShow) {
-      print("HANDLER NOTFIY");
-      LocalNotification.showNotification(message.notification?.title,
-          message.notification?.body, '${jsonEncode(payload)}');
-    } else {
-      selectNotificationSubject.add(jsonEncode(payload));
-    }
+    print('payload ${message.data}');
+    print("HANDLER NOTFIY");
+    LocalNotification.showNotification(message.notification?.title,
+        message.notification?.body, '${jsonEncode(payload)}');
   }
 }

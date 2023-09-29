@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Mvvm Bloc Di</string>
+	<string>Base Getx</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>mvvm_bloc_di</string>
+	<string>base_getx</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -47,5 +47,35 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- LOGINSOCIAL CONFIG -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb6432984273463612</string>
+				<string>com.googleusercontent.apps.1036195312316-3dablt318a5di1v7v18qka5j5qhoim47</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>6432984273463612</string>
+	<key>FacebookClientToken</key>
+	<string>ff210ac9846a4f89ee7fd2da1bd68ff5</string>
+	<key>FacebookDisplayName</key>
+	<string>EXAMHUB</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+	<!-- LOGINSOCIAL CONFIG -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

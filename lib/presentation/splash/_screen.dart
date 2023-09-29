@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:temp_package_name/app/app.dart';
-import 'package:temp_package_name/presentation/splash/splash.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  final controller = findInstance<SplashBloc>();
-  @override
-  void initState() {
-    super.initState();
-    controller.add(InitSplashEvent());
-  }
 
   @override
   Widget build(BuildContext context) {

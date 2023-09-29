@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart' as Dio;
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 
 const int _SUCCESS = 200;
 const int _ERROR_TOKEN = 401;
@@ -58,18 +58,18 @@ class BaseResponse<T> {
     } catch (e) {
       log("Error BaseResponse.withErrorRequest: $e");
     } finally {
-      this.message = 'message_error_request'.tr();
+      this.message = 'message_error_request'.tr;
       this.data = null;
     }
   }
 
   BaseResponse.withErrorConvertData(error) {
-    this.message = 'message_error_convert'.tr();
+    this.message = 'message_error_convert'.tr;
     this.data = null;
   }
 
   BaseResponse.withNoInternetConnection() {
-    this.message = 'message_disconnect'.tr();
+    this.message = 'message_disconnect'.tr;
     this.data = null;
   }
 }

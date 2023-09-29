@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:temp_package_name/presentation/resource/theme/theme_manager/theme_manager.dart';
 
 class AppPrefs {
   AppPrefs._();
@@ -27,7 +26,6 @@ class AppPrefs {
       Directory appDocDirectory = await getApplicationDocumentsDirectory();
       Hive.init(appDocDirectory.path);
     }
-    // Hive.registerAdapter(UserModelAdapter());
     box = await Hive.openBox(
       'AppPref',
       encryptionCipher: HiveAesCipher(_encryptionKey),
@@ -45,9 +43,9 @@ class AppPrefs {
 
   static String? get accessToken => box.get('accessToken');
 
-  static set themeMode(String? value) => box.put('theme', value);
+  static set isLightMode(bool? value) => box.put('isLightMode', value ?? false);
 
-  static String? get themeMode => box.get('theme')??ThemeManager.lightMode;
+  static bool get isLightMode => box.get('isLightMode') ?? true ;
 
   // set userData(UserModel? value) => box.add(value);
 

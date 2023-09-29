@@ -1,65 +1,63 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:base_getx/presentation/resource/resource.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
+
 import 'app/app.dart';
-import 'presentation/resource/resource.dart';
+import 'data/local_data/app_prefs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initEasyLocalization();
   await Firebase.initializeApp();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: []); //Ẩn hoặc hiện (status bar) và  (navigation bar) của hệ điều hành
   await SystemChrome.setPreferredOrientations(
       DeviceOrientation.values); //Được sử dụng để đặt các hướng màn hình
   await AppPrefs().initialize();
-  bloc.Bloc.observer = AppBlocObserver();
-  getItSetup();
-  await initializeNotification();
-  return runApp(wrapEasyLocalization(child: const _App()));
+  runApp(const App());
 }
 
-class _App extends StatefulWidget {
-  const _App({Key? key}) : super(key: key);
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
-class _AppState extends State<_App> {
-  @override
-  void initState() {
-    super.initState();
-    findInstance<ThemeBloc>().add(InitThemeEvent());
-  }
-
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Portal(
       child: OverlaySupport(
-        child: ScreenUtilInit(
-          designSize: const Size(390, 844),
-          minTextAdapt: true,
-          useInheritedMediaQuery: true,
-          builder: (_, child) {
-            return WidgetThemeWraper(
-              builder: (ThemeState themeState) => MaterialApp.router(
-                routerConfig: RouterManager.routers,
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
-                debugShowCheckedModeBanner: false,
-                theme: themeState.theme,
-              ),
-            );
-          },
-        ),
-      ),
+          child: ScreenUtilInit(
+              designSize: const Size(390, 844),
+              minTextAdapt: true,
+              useInheritedMediaQuery: true,
+              builder: (_, child) {
+                return GetMaterialApp(
+                  title: 'BASE GETX',
+                  theme: AppPrefs.isLightMode?ThemeManager.getLightModeTheme():ThemeManager.getDarkModeTheme(),
+                  debugShowCheckedModeBanner: false,
+                  useInheritedMediaQuery: true,
+                  defaultTransition: Transition.rightToLeft,
+                  locale: TranslationService.locale,
+                  fallbackLocale: TranslationService.fallbackLocale,
+                  translations: TranslationService(),
+                  initialRoute: RouterManager.splash,
+                  getPages: RouterManager.routers,
+                  supportedLocales: TranslationService.appSupportedLocales,
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                );
+              })),
     );
   }
 }

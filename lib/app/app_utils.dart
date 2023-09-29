@@ -38,7 +38,7 @@ class AppUtils {
         );
       },
       position: notificationPosition ?? NotificationPosition.top,
-      duration: duration ?? Duration(milliseconds: 2000),
+      duration: duration ?? const Duration(milliseconds: 2000),
     );
   }
 }

@@ -1,7 +1,10 @@
 class AssetManager {
   AssetManager._();
   //PNG
-  static const emptyImage = 'empty_image.png';
+  static const emptyData = 'assets/images/png/empty_icon.png';
+  static const errorImage = 'assets/images/png/empty_image.png';
+  static const errorAvatar = 'assets/images/png/empty_avatar.png';
+
   //SVG
   
   ////////////////////////////////////////////////////////////

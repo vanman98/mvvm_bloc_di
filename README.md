@@ -1,4 +1,4 @@
-# mvvm_bloc_di
+# base_getx
 
 A new Flutter project.
 

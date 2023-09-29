@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "582911509586",
-    "project_id": "mvvm-bloc-di",
-    "storage_bucket": "mvvm-bloc-di.appspot.com"
+    "project_number": "649601536884",
+    "project_id": "basegetx-d049d",
+    "storage_bucket": "basegetx-d049d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:582911509586:android:fb95ec02d8be62c67a8b8b",
+        "mobilesdk_app_id": "1:649601536884:android:b3610de395d45ba7865221",
         "android_client_info": {
-          "package_name": "com.example.mvvm_bloc_di"
+          "package_name": "com.man.base_getx"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "582911509586-32r5qf6afopl2hermilm363m00k1pg02.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCqi1enH4EC1QpSK5YKhS2wT-Hy1gl9QIU"
+          "current_key": "AIzaSyDxCX9etLHGzgny0xD0NLUa729zlOlfu20"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "582911509586-32r5qf6afopl2hermilm363m00k1pg02.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
